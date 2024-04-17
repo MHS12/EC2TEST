@@ -1,0 +1,12 @@
+{%extends 'users/userbase.html'%}
+{%block contents%}
+<center>
+    <h2>Twitter FIND Dataset Results</h2>
+    <h4 class="media-heading">SVM Accuracy: {{svm_acc}} </h4>
+    <p>{{svm_report|safe}}</p>
+    <h4 class="media-heading">Naive Bayes Accuracy {{nb_acc}}</h4>
+    <p>{{nb_report|safe}}</p>
+    <h4 class="media-heading">DTC Accuracy {{dtc_acc}}</h4>
+    <p>{{dtc_report|safe}}</p>
+</center>
+{%endblock%}

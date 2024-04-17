@@ -1,0 +1,135 @@
+
+from django.conf import settings
+import pandas as pd
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.svm import LinearSVC
+from sklearn.metrics import classification_report
+from sklearn.metrics import precision_score
+from sklearn.metrics import recall_score
+from sklearn.metrics import f1_score
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import confusion_matrix
+
+
+
+
+
+path = settings.MEDIA_ROOT + "\\" + "tweets_combinedcsv"
+df = pd.read_csv(path)    
+
+texts = df['tweet'].astype(str)
+y = df['target']
+
+vectorizer = CountVectorizer(stop_words='english', min_df=0.0001)
+X = vectorizer.fit_transform(texts)
+
+import numpy as np
+from sklearn.model_selection import train_test_split
+texts_train, texts_test, y_train, y_test=train_test_split(X, y, test_size=0.3, random_state=1)
+
+model = LinearSVC(class_weight="balanced", dual=False, tol=1e-2, max_iter=1e5)
+model.fit(texts_train, y_train) 
+
+pred=model.predict(texts_test) 
+
+print(confusion_matrix(y_test, pred))
+
+accuracy_score(y_test, pred)
+targets=['class 0', 'class 1']
+print(classification_report(y_test, pred, target_names=targets))
+
+from sklearn.naive_bayes import MultinomialNB
+model1=MultinomialNB()
+model1.fit(texts_train, y_train)
+MultinomialNB(alpha=1.0, class_prior=None, fit_prior=True)
+
+pred1=model1.predict(texts_test)
+
+print(confusion_matrix(y_test, pred1))
+
+accuracy_score(y_test, pred1)
+
+targets=['class 0', 'class 1']
+print(classification_report(y_test, pred1, target_names=targets))
+
+
+
+
+
+
+
+def svm(self):
+        # from sklearn.ensemble import RandomForestRegressor
+        from sklearn.svm import SVR
+        model = SVR()
+
+        # print("b:",self.y_train)
+        self.x_train = self.x_train.fillna(self.x_train.mean())
+        # print("a", self.x_train)
+        model.fit(self.x_train, self.y_train)
+        # print("sdfgh")
+        # print("x test", self.x_test)
+
+        y_pred = model.predict(self.x_test)
+        from sklearn.metrics import mean_absolute_error
+        mae = mean_absolute_error(y_pred, self.y_test)
+        from sklearn.metrics import mean_squared_error
+        mse = mean_squared_error(y_pred, self.y_test)
+        from sklearn.metrics import r2_score
+        r2 = r2_score(y_pred, self.y_test)
+
+        return mae, mse, r2  
+
+
+def NB(self):
+        # from sklearn.ensemble import RandomForestRegressor
+        from sklearn.naive_bayes import MultinomialNB
+        model1=MultinomialNB()
+    
+
+        # print("b:",self.y_train)
+        self.x_train = self.x_train.fillna(self.x_train.mean())
+        # print("a", self.x_train)
+        model.fit(self.x_train, self.y_train)
+        # print("sdfgh")
+        # print("x test", self.x_test)
+
+        y_pred = model.predict(self.x_test)
+        from sklearn.metrics import mean_absolute_error
+        mae = mean_absolute_error(y_pred, self.y_test)
+        from sklearn.metrics import mean_squared_error
+        mse = mean_squared_error(y_pred, self.y_test)
+        from sklearn.metrics import r2_score
+        r2 = r2_score(y_pred, self.y_test)
+
+        return mae, mse, r2     
+
+
+def dtc(self):
+        # from sklearn.ensemble import RandomForestRegressor
+        # from sklearn.svm import SVR
+        from sklearn.tree import DecisionTreeClassifier
+        model = DecisionTreeClassifier()
+
+        # print("b:",self.y_train)
+        self.x_train = self.x_train.fillna(self.x_train.mean())
+        # print("a", self.x_train)
+        model.fit(self.x_train, self.y_train)
+        # print("sdfgh")
+        # print("x test", self.x_test)
+
+        y_pred = model.predict(self.x_test)
+        from sklearn.metrics import mean_absolute_error
+        mae = mean_absolute_error(y_pred, self.y_test)
+        from sklearn.metrics import mean_squared_error
+        mse = mean_squared_error(y_pred, self.y_test)
+        from sklearn.metrics import r2_score
+        r2 = r2_score(y_pred, self.y_test)
+
+        return mae, mse, r2  
+
+
+
+
+
+

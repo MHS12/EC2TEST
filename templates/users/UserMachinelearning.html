@@ -1,0 +1,42 @@
+{% extends 'users/userbase.html'%}
+{% block contents %}
+
+ <section id="intro">
+    <div class="intro-text">
+      <p><h3 align="center" style="color:rgb(237, 233, 227);">User Machine Learning Results.</h3></p>
+        <table class="table">
+            <tr>
+                <th>S.NO</th>
+                <th>Algorithm</th>
+                <th>Accuracy</th>
+                <th>Precession</th>
+                <th>Recall</th>
+                <th>F1-Score</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Naive Bayes</td>
+                <td>{{nb.nb_accuracy}}</td>
+                <td>{{nb.nb_precision}}</td>
+                <td>{{nb.nb_recall}}</td>
+                <td>{{nb.nb_f1score}}</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>support vector machine</td>
+                <td>{{rf.rf_accuracy}}</td>
+                <td>{{rf.rf_precision}}</td>
+                <td>{{rf.rf_recall}}</td>
+                <td>{{rf.rf_f1score}}</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>DTC</td>
+                <td>{{dtc.dtc_accuracy}}</td>
+                <td>{{dtc.dtc_precision}}</td>
+                <td>{{dtc.dtc_recall}}</td>
+                <td>{{dtc.dtc_f1score}}</td>
+            </tr>
+            </div>
+  </section>
+{%endblock%}

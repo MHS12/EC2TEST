@@ -1,0 +1,48 @@
+{%extends 'users/userbase.html'%} {%block contents%}
+
+<style>
+  .But_class {
+    display: flex;
+    justify-content: center;
+  }
+  .But_class a {
+    border-style: solid;
+    border-radius: 10px;
+    transition: 1s;
+  }
+  .But_class a:hover {
+    background-color: rgb(240, 60, 2);
+    color: white;
+  }
+  td {
+    font-size: 15px;
+  }
+</style>
+<div class="section-header">
+  <h2 class="section-title wow fadeInDown">Dataset view :</h2>
+  <p class="wow fadeInDown"></p>
+</div>
+
+<div class="row" style="margin: 10px">
+  <table border="1">
+    <th style="padding: 5px">SNo</th>
+    <th style="text-align: center">Tweet</th>
+    <th style="padding: 5px">Clean Data</th>
+    <th style="padding: 5px">Target</th>
+    <tbody>
+      <!-- Render table rows -->
+      {% for row in data %}
+      <tr>
+        <td style="text-align: center">{{row.sno}}</td>
+        <td>{{row.tweet}}</td>
+        <td>{{row.clean_data}}</td>
+        <td style="text-align: center">{{row.target}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<div class="But_class">
+  <a href="{% url 'Datasetview' %}" class="nav-item nav-link">Back</a>
+</div>
+{%endblock%}
